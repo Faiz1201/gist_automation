@@ -59,8 +59,25 @@ class hooqTestExample(unittest.TestCase):
         self.check_title_success_signup()
         self.press_button_start_signup()
 
+    def invalid_edit_text(self, email, password):
+        self.check_title_page()
+        self.press_button_register()
+        self.press_button_signup_email()
+        self.input_email(email)
+        self.input_password(password)
+        self.button_berikutnya()
+
     def test_sign_up_by_email(self):
         self.start_signup_hooq('faizal@mailinator.com', 'faiz1234')
+
+    def test_invalid_email(self):
+        self.invalid_edit_text('faizal@m', 'faiz1234')
+
+    def test_empty_email(self):
+        self.invalid_edit_text('', 'faiz1234')
+
+    def test_empty_password(self):
+        self.invalid_edit_text('faizal@mailinator.com', '')
 
     def tearDown(self):
         self.driver.quit()
